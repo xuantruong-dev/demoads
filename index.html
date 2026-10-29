@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07131c">
+<meta name="description" content="Dashboard hợp nhất về hành vi, độ tuổi, giới tính và các góc nhìn thấu hiểu người học lái xe.">
+<title>Lăng Kính · Thấu hiểu khách hàng</title>
+<link rel="stylesheet" href="./assets/css/dashboard.css">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+</head>
+<body class="redesigned night">
+<noscript><p>Vui lòng bật JavaScript trong trình duyệt để xem số liệu và tương tác với dashboard.</p></noscript>
+<a class="sr-only" href="#summary">Đi tới nội dung dashboard</a>
+<div class="app-shell">
+<aside class="sidebar" aria-label="Điều hướng dashboard">
+  <a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">LĂNG KÍNH</span><span class="brand-subtitle">AUDIENCE STUDIO</span></span></a>
+  <div class="sidebar-label">KHÔNG GIAN THẤU HIỂU</div>
+  <nav>
+    <a class="nav-link active" href="#summary"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="13" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="13" width="6" height="6" rx="1.5"/><rect x="13" y="13" width="6" height="6" rx="1.5"/></svg></span>Tổng quan</a>
+    <a class="nav-link" href="#demographics"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="7" r="3.5"/><path d="M4 20v-2a7 7 0 0 1 14 0v2M18 4a4 4 0 0 1 0 7"/></svg></span>Nhân khẩu học</a>
+    <a class="nav-link" href="#insights"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20s-8-5-8-11a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 6-8 11-8 11Z"/><path d="M7 11h3l1.5-3 2 6 1.5-3h3"/></svg></span>Thấu cảm khách hàng</a>
+    <a class="nav-link" href="#performance"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v17h17M7 16v-5M12 16V6M17 16v-8"/></svg></span>Hành vi chi tiết</a>
+    <a class="nav-link" href="#catalog"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="16" height="17" rx="2"/><path d="M3 8h16M9 8v12M3 14h16"/></svg></span>Thư viện chỉ số</a>
+    <a class="nav-link" href="#methodology"><span class="nav-index" aria-hidden="true"><svg viewBox="0 0 22 22" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h9l5 5v13H5Z M14 2v6h5 M9 12h6M9 16h6"/></svg></span>Nguồn dữ liệu</a>
+  </nav>
+  <div class="sidebar-bottom"><div class="source-mini"><span class="source-icon">TƯ DUY SÁNG TẠO</span><div class="source-name">Quan sát trước.<br>Thấu cảm sâu hơn.</div><p class="source-description">Dữ liệu → Giả thuyết<br>→ Câu hỏi phỏng vấn</p></div><span class="sidebar-footer">2 nguồn Excel · Một dashboard</span></div>
+</aside>
+<main class="main">
+  <header class="topbar workspace-header"><div class="breadcrumb">Nghiên cứu đối tượng <span>/</span> <strong>Nội dung đào tạo lái xe</strong></div><div class="topbar-actions"><button class="btn" id="printReport" type="button">In báo cáo</button><button class="btn btn-primary" id="exportCsv" type="button">↓ Xuất dữ liệu</button></div></header>
+  <div class="page-intro" id="overview"><div class="intro-copy"><div class="eyebrow">QUAN SÁT · KHÁM PHÁ · THẤU CẢM</div><h1>Thấu hiểu khách hàng</h1><p>Đọc hành vi. Đặt câu hỏi tốt hơn. Sáng tạo sát nhu cầu.</p></div><div class="intro-meta"><span class="status-pill">Mọi chiến dịch · hợp nhất</span><span><b id="activeMetricCount"></b> trường từ nhóm.xlsx</span></div></div>
+  <div class="view-tools">
+    <div class="filters" aria-label="Bộ lọc dashboard"><div class="filter-group dates"><label for="dateFrom">Khoảng ngày</label><input id="dateFrom" type="date" aria-label="Từ ngày"><span>–</span><input id="dateTo" type="date" aria-label="Đến ngày"></div><div class="filter-group"><label for="ageFilter">Độ tuổi</label><select id="ageFilter"><option value="all">Tất cả độ tuổi</option><option value="18-24">18–24 tuổi</option><option value="25-34">25–34 tuổi</option><option value="35-44">35–44 tuổi</option><option value="45-54">45–54 tuổi</option><option value="55-64">55–64 tuổi</option><option value="65+">65+ tuổi</option></select></div><button class="filter-reset" id="resetFilters" type="button" aria-label="Đặt lại bộ lọc">Đặt lại ↺</button></div>
+    <div class="display-actions"><button class="btn" id="depthToggle" aria-pressed="true" type="button">Biểu đồ 3D</button><button class="btn" id="motionToggle" aria-pressed="true" type="button">Hiệu ứng: bật</button></div>
+  </div>
+  <div class="filter-context context-strip"><span id="filterStatus" aria-live="polite"></span><a href="#insights">Khám phá góc nhìn thấu cảm ↗</a></div>
+  <div id="noRecords" class="note-box" hidden>Khoảng ngày đang chọn không có bản ghi. Hãy chọn khoảng ngày khác để xem biểu đồ.</div>
+  <section class="section" id="summary"><div class="section-heading"><div><div class="eyebrow">01 / TOÀN CẢNH HÀNH VI</div><h2>Toàn cảnh người xem</h2></div><span class="section-summary">Di chuột hoặc chạm để xem số</span></div><div id="kpiGrid" class="kpi-grid"></div>
+    <div class="summary-stage">
+    <div class="card" id="trendPanel"><div class="card-header"><div><h3>Hành vi theo thời gian</h3><p id="trendSubtitle"></p></div><label class="sr-only" for="trendMetric">Chỉ số theo ngày</label><select id="trendMetric"><option value="10">Hiển thị</option><option value="30">Click tất cả</option><option value="41">Click liên kết</option><option value="23">Video ≥3 giây</option><option value="22">ThruPlay</option><option value="55">Tương tác bài</option><option value="61">Hội thoại</option></select></div><div id="chartTrend" class="chart-box"></div></div><article class="card spotlight-card" id="audienceSpotlight"></article></div>
+    <div id="signalStrip" class="signal-strip"></div>
+    <div id="dailyCharts" class="visual-daily-grid"></div>
+    <div id="fullViewsPanel" class="card visual-gap" hidden><div class="card-header"><h3>Lượt xem trong báo cáo đầy đủ</h3></div><div id="fullViewsChart"></div><p class="chart-note">Tổng ở cấp chiến dịch của báo cáo 01/01–29/10/2026. Không phân bổ giả theo tuổi, giới tính hoặc ngày.</p></div>
+  </section>
+
+  <section class="section" id="demographics"><div class="section-heading"><div><div class="eyebrow">02 / NHÂN KHẨU HỌC</div><h2>Chân dung người xem</h2></div><span class="badge teal" id="demographicCount">Giới tính · Độ tuổi</span></div>
+    <div id="genderSection" class="visual-gap"><div id="genderCharts"></div><p id="genderSource" class="chart-note"></p></div>
+    <div class="age-detail-heading"><span class="eyebrow">KHÁM PHÁ SÂU THEO TUỔI</span><h3>Chú ý, tương tác và hội thoại</h3></div>
+    <div class="card" id="agePanel"><div class="card-header"><h3>Phản hồi theo độ tuổi</h3><label class="sr-only" for="ageMetric">Chỉ số phân bổ theo tuổi</label><select id="ageMetric"><option value="10">Hiển thị</option><option value="11">Tiếp cận cộng dồn*</option><option value="30">Click tất cả</option><option value="41">Click liên kết</option><option value="55">Tương tác bài</option><option value="61">Hội thoại</option><option value="23">Video ≥3 giây</option><option value="68">Video 100%</option></select></div><div id="ageChart" class="chart-box"></div></div>
+    <div class="two-col visual-gap"><div class="card" id="ageReachPanel"><div class="card-header"><h3>Cơ cấu tiếp cận cộng dồn theo tuổi*</h3></div><div id="chartAgeReach"></div></div><div class="card" id="ageMessagePanel"><div class="card-header"><h3>Cơ cấu hội thoại theo tuổi</h3></div><div id="chartMessageShare"></div></div></div>
+    <details id="ageTableDetails" class="compact-details"><summary>Bảng đối chiếu theo tuổi</summary><div id="ageTable"></div></details>
+  </section>
+
+  <section class="section" id="insights"><div class="section-heading"><div><div class="eyebrow">03 / TỪ BẰNG CHỨNG ĐẾN THẤU CẢM</div><h2>Điều gì đáng tìm hiểu thêm?</h2><p class="section-description">Quan sát hành vi để hình thành giả thuyết về nhu cầu, sự quan tâm và rào cản của người học.</p></div><div class="section-tools"><span class="badge" id="empathyPlusCount"></span><a class="btn" href="#empathyMap">Bản đồ thấu cảm ↓</a></div></div><div id="empathyPlus"></div><div class="section-subheading"><div class="eyebrow">ĐỐI CHIẾU THÊM</div><h3>Mối liên hệ giữa chú ý và phản hồi</h3></div><div id="audienceVisuals"></div></section>
+
+  <section class="section" id="performance"><div class="section-heading"><div><div class="eyebrow">04 / HÀNH VI CHI TIẾT</div><h2>Chú ý · Tương tác · Kết nối</h2></div><span class="badge teal" id="technicalChartCount"></span></div><div id="technicalCharts"></div></section>
+
+  <section class="section" id="catalog"><div class="section-heading"><div><div class="eyebrow">05 / THƯ VIỆN DỮ LIỆU</div><h2 id="catalogTitle">Tra cứu mọi chỉ số</h2></div><span class="badge" id="galleryCount"></span></div>
+    <div class="catalog-tools visual-catalog-tools"><div class="catalog-search"><label class="sr-only" for="metricSearch">Tìm chỉ số</label><input id="metricSearch" type="search" placeholder="Tìm tỷ lệ click, video, tương tác…"></div><div class="catalog-filters"><label class="sr-only" for="categoryFilter">Nhóm chỉ số</label><select id="categoryFilter"><option value="all">Tất cả chỉ số</option><option>Phân phối</option><option>Tỷ lệ & phân phối</option><option>Kết quả</option><option>Video</option><option>Tương tác</option><option>Tin nhắn</option><option>Thiết lập</option></select></div></div><div class="catalog-status-row"><div id="catalogCount" class="catalog-count"></div><button id="clearMetricSearch" class="filter-reset" type="button">Xóa tìm kiếm</button></div><div id="allMetricGallery"></div><div id="extraSourceMetrics"></div>
+    <details id="metricTableDetails" class="compact-details"><summary>Bảng giá trị & cách tính</summary><div class="table-scroll"><table class="catalog-table"><thead><tr><th>Mã</th><th>Chỉ số</th><th>Giá trị</th><th>Dữ liệu</th><th>Cách đọc</th></tr></thead><tbody id="metricRows"></tbody></table></div></details>
+  </section>
+
+  <section class="section" id="methodology"><details class="compact-details"><summary>Nguồn dữ liệu & cách đọc biểu đồ</summary><div id="sourceNotes"></div></details></section>
+  <footer class="footer"><strong>LĂNG KÍNH / AUDIENCE STUDIO</strong><span>Mọi chiến dịch hợp nhất · * Số cộng dồn có thể trùng người</span><a href="#overview">Về đầu trang ↑</a></footer>
+</main></div>
+<div id="tooltip" role="tooltip"></div>
+<script defer src="./assets/js/data.js"></script><script defer src="./assets/js/model.js"></script><script defer src="./assets/vendor/gsap.min.js"></script><script defer src="./assets/js/dashboard.js"></script>
+</body>
+
+</html>
